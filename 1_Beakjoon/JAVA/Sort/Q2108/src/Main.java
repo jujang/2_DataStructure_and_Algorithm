@@ -36,20 +36,21 @@ public class Main {
             }
         }
 
+        // 산술평균 구하기
         double avg = (double)sum/(double)N;
         int integerAvg = Integer.parseInt(String.format("%.0f", avg));
+
+        // 중앙값 구하기
         Arrays.sort(arr);
         int middleValue = arr[N/2];
+
+        // 최빈값 구하기
         int maxCnt = 0;
-        int maxCntValue = 0;
-        int secondmaxValue = 0;
+        int maxCntValue = 1;
         Iterator<Integer> keys = hashMap.keySet().iterator();
         while(keys.hasNext()){
             int key = keys.next();
             if(hashMap.get(key) > maxCnt){
-                if(maxCntValue != 0){
-                    secondmaxValue = maxCntValue;
-                }
                 maxCnt = hashMap.get(key);
                 maxCntValue = key;
             }
@@ -60,12 +61,23 @@ public class Main {
             int key = keys2.next();
             if(hashMap.get(key) == maxCnt){
                 cnt++;
-                if(cnt >= 2){
-                    maxCntValue = secondmaxValue;
-                }
             }
         }
+        if(cnt >= 2){
+            int[] cntArr = new int[cnt];
+            Iterator<Integer> keys3 = hashMap.keySet().iterator();
+            int counter = 0;
+            while(keys3.hasNext()){
+                int key = keys3.next();
+                if(hashMap.get(key) == maxCnt){
+                    cntArr[counter++] = key;
+                }
+            }
+            Arrays.sort(cntArr);
+            maxCntValue = cntArr[1];
+        }
 
+        // 범위 구하기
         int range = maxNum-minNum;
 
         bw.write(integerAvg+"\n");
