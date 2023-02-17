@@ -10,28 +10,33 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     public static void main(String[] args) throws IOException{
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int N = Integer.parseInt(br.readLine());
 
-//        int[] a = new int[N];
-//        int[] s = new int[N];
+        int moveCnt = (int)Math.pow(2, N) - 1;
+        bw.write(moveCnt + "\n");
 
-        int result = calculateS(N);
+        hanoi(N, 1, 2, 3);
 
-        bw.write(result+"");
         bw.flush();
         bw.close();
     }
 
-    public static int calculateS(int n){
-        if(n == 1){
-            return 1;
+    public static void hanoi(int N, int start, int middle, int goal) throws IOException{
+        if(N == 1) {
+            bw.write(start + " " + goal + "\n");
         }
-        return calculateS(n-1)*2 + 1;
+        else {
+            hanoi(N-1, start, goal, middle);
+
+            bw.write(start + " " + goal + "\n");
+
+            hanoi(N-1, middle, start, goal);
+        }
     }
 
 }
