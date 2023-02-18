@@ -32,8 +32,6 @@ public class Main {
                     inputArr[thisCnt] = i;
                     checkArr[i-1] = true;
                     printingSequence(availableRange, thisCnt+1, availableCnt, checkArr.clone(), inputArr.clone());
-                    inputArr[thisCnt] = 0;
-                    checkArr[i-1] = false;
                 }
             }
         } else {

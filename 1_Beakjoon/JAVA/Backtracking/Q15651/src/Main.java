@@ -18,23 +18,17 @@ public class Main {
         int M = Integer.parseInt(st.nextToken());
 
         int[] inputArr = new int[M];
-        boolean[] checkArr = new boolean[N];
-        printingSequence(N, 0, M, checkArr, inputArr);
+        printingSequence(N, 0, M, inputArr);
 
         bw.flush();
         bw.close();
     }
 
-    public static void printingSequence(int availableRange, int thisCnt, int availableCnt, boolean[] checkArr, int[] inputArr) throws IOException{
+    public static void printingSequence(int availableRange, int thisCnt, int availableCnt, int[] inputArr) throws IOException{
         if(thisCnt + 1 <= availableCnt){
             for(int i = 1; i <= availableRange; i++){
-                if(!checkArr[i-1]){
-                    inputArr[thisCnt] = i;
-                    checkArr[i-1] = true;
-                    printingSequence(availableRange, thisCnt+1, availableCnt, checkArr.clone(), inputArr.clone());
-                    inputArr[thisCnt] = 0;
-                    checkArr[i-1] = false;
-                }
+                inputArr[thisCnt] = i;
+                printingSequence(availableRange, thisCnt+1, availableCnt, inputArr.clone());
             }
         } else {
             for(int a = 0; a < inputArr.length; a++){
