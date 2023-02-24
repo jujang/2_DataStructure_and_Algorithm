@@ -9,9 +9,9 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    static int S = 1_000_000_007;
     static int N;
     static int K;
+    static int S = 10007;
     public static void main(String[] args) throws IOException{
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,32 +23,22 @@ public class Main {
         K = Integer.parseInt(st.nextToken());
 
         int N_K = N-K;
-        if(K < N_K){
-            int temp = K;
-            K = N_K;
-            N_K = temp;
+        if(N_K > K){
+            int temp = N_K;
+            N_K = K;
+            K = temp;
         }
-        int result = 1;
+
+        long result = 1;
         for(int i = N; i > K; i--){
-            result = result*i;
+            result = (result*i);
         }
 
-        int multiple = 1;
-        for(int j = 1; j <= N_K; j++){
-            multiple = multiple*j;
+        for(int j = N_K; j > 0; j--){
+            result = (result/j);
         }
 
-        long sol;
-        if(N != 0) {
-            if((long)result/(long)multiple < S){
-                sol = (long)result/(long)multiple;
-            } else {
-                sol = ((long)result/(long)multiple)%(long)S;
-            }
-            bw.write(sol+"");
-        } else {
-            bw.write(1+"");
-        }
+        bw.write(result%S + "");
 
         bw.flush();
         bw.close();
