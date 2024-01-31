@@ -18,7 +18,7 @@ class Result {
 
         int[] list = new int[100];
         for(int i = 0; i < a.size(); i++){
-            list[a.get(i)-1] = list[a.get(i)-1]+1;
+            list[a.get(i)-1]++;
         }
 
         int maxSum = 0;
